@@ -16,19 +16,20 @@ you may also refer to `/out_00`, which has been pushed to github
 
 - 3 improvement upon the algorithm: i feel that Algorithm 1 on page 4 of the paper can be improved upon. Specifically, the method of gradient descent is a little imefficient. 
 ## Specific improvement
-it's easy to see that L(w) is a quadratic function. let 
+It's easy to see that \( L(w) \) is a quadratic function. Let 
 $$
-L(w) = \frac{1}{n}(1 - b^T w + w^T Aw)
+L(w) = \frac{1}{n}(1 - b^T w + w^T A w)
 $$
 where 
 $$
-A = (\sigma (f_i, f_j))
+A = (\sigma(f_i, f_j))
 $$
-We may easily obtain that A is positive semidefinite, so the minimum occurs when
+We may easily obtain that \( A \) is positive semidefinite, so the minimum occurs when
 $$
 w = A^{-1}b
 $$
-thus eliminating the need for a gradient descent approach
+thus eliminating the need for a gradient descent approach.
+
 
 # The original readme begins below here
 
