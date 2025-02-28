@@ -1,3 +1,12 @@
+# Andy's note:
+setting up the environment and running the program took me a while. Here are a few modifications that I made.
+- `/requirements.txt` numpy 1.20.1 in requirements.txt doesn't work. other packages require numpy 1.21.0 or higher, so i reinstalled it manually
+- `/alphagen_qlib/stock_data.py` FeatureType.VWAP makes no sense, since the values are all NaN, which got deleted anyway. So I removed it.
+- `/scripts/rl.py` Somehow qlib.data.D.calendar() only supports up to 2020-09-24, so segments in run_single_experiment() have to end before that.
+
+
+# The original readme begins below here
+
 # AlphaGen
 
 <p align="center">
