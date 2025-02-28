@@ -1,0 +1,1 @@
+{"exprs": ["Std(Mul(10.0,$close),40d)", "Less(Corr(Delta(Greater(-30.0,Div($close,$close)),40d),Add($open,1.0),1d),-5.0)", "Abs(Less(Delta(Mul(-0.5,Abs(Ref($high,1d))),20d),10.0))"], "weights": [5.5407883373745524e-05, 3.7684998577917506e-05, 0.014810090049381828]}

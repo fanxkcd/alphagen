@@ -4,6 +4,30 @@ setting up the environment and running the program took me a while. Here are a f
 - `/alphagen_qlib/stock_data.py` FeatureType.VWAP makes no sense, since the values are all NaN, which got deleted anyway. So I removed it.
 - `/scripts/rl.py` Somehow qlib.data.D.calendar() only supports up to 2020-09-24, so segments in run_single_experiment() have to end before that.
 
+# Answers to the interview test
+- 1 I managed to run the program. part of the logged performance looks like this: 
+<p align="center">
+    <img src="images/log1.jpg" width=275 />
+</p>
+
+you may also refer to `/out_00`, which has been pushed to github
+
+- 2 I found that loading data is handled by StockData in `/rl.py`, which in turn calls QlibDataLoader. You only need to modify _load_exprs in StockData._load_exprs() to load your own data.
+
+- 3 improvement upon the algorithm: i feel that Algorithm 1 on page 4 of the paper can be improved upon. Specifically, the method of gradient descent is a little imefficient. 
+it's easy to see that L(w) is a quadratic function. let 
+$$
+L(w) = \frac{1}{n}(1 - b^T w + w^T Aw)
+$$
+where 
+$$
+A = (\sigma (f_i, f_j))
+$$
+We may easily obtain that A is positive semidefinite, so the minimum occurs when
+$$
+w = A^{-1}b
+$$
+thus eliminating the need for a gradient descent approach
 
 # The original readme begins below here
 
