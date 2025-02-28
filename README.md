@@ -15,7 +15,7 @@ you may also refer to `/out_00`, which has been pushed to github
 - 2 I found that loading data is handled by StockData in `/rl.py`, which in turn calls QlibDataLoader. You only need to modify _load_exprs in StockData._load_exprs() to load your own data.
 
 - 3 improvement upon the algorithm: i feel that Algorithm 1 on page 4 of the paper can be improved upon. Specifically, the method of gradient descent is a little imefficient. 
-## Specific improvement
+## Specific improvement of question 3
 It's easy to see that \( L(w) \) is a quadratic function. Let 
 $$
 L(w) = \frac{1}{n}(1 - b^T w + w^T A w)
