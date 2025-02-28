@@ -203,13 +203,20 @@ def run_single_experiment(
             device=device
         )
 
+    # segments = [
+    #     ("2012-01-01", "2021-12-31"),
+    #     ("2022-01-01", "2022-06-30"),
+    #     ("2022-07-01", "2022-12-31"),
+    #     ("2023-01-01", "2023-06-30")
+    # ]
     segments = [
-        ("2012-01-01", "2021-12-31"),
-        ("2022-01-01", "2022-06-30"),
-        ("2022-07-01", "2022-12-31"),
-        ("2023-01-01", "2023-06-30")
+        ("2012-01-01", "2018-12-31"),
+        ("2019-01-01", "2019-06-30"),
+        ("2019-07-01", "2019-12-31"),
+        ("2020-01-01", "2020-06-30")
     ]
     datasets = [get_dataset(*s) for s in segments]
+    #calculators = [QLibStockDataCalculator(d, target) for d in datasets if d.n_days > 0]
     calculators = [QLibStockDataCalculator(d, target) for d in datasets]
 
     def build_pool(exprs: List[Expression]) -> LinearAlphaPool:

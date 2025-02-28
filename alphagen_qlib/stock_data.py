@@ -11,7 +11,7 @@ class FeatureType(IntEnum):
     HIGH = 2
     LOW = 3
     VOLUME = 4
-    VWAP = 5
+    #VWAP = 5
 
 
 _DEFAULT_QLIB_DATA_PATH = "~/.qlib/qlib_data/cn_data"
@@ -69,8 +69,11 @@ class StockData:
         start_index = cal.searchsorted(pd.Timestamp(self._start_time))  # type: ignore
         end_index = cal.searchsorted(pd.Timestamp(self._end_time))  # type: ignore
         real_start_time = cal[start_index - self.max_backtrack_days]
-        if cal[end_index] != pd.Timestamp(self._end_time):
-            end_index -= 1
+        # print(f"end_index: {end_index}, max_future_days: {self.max_future_days}, len(cal): {len(cal)}")#ANDY
+        # if cal[end_index] != pd.Timestamp(self._end_time):
+        #     end_index -= 1
+        if end_index + self.max_future_days >= len(cal):
+            end_index = len(cal) - self.max_future_days - 1
         real_end_time = cal[end_index + self.max_future_days]
         return (QlibDataLoader(config=exprs)  # type: ignore
                 .load(self._instrument, real_start_time, real_end_time))
@@ -78,10 +81,13 @@ class StockData:
     def _get_data(self) -> Tuple[torch.Tensor, pd.Index, pd.Index]:
         features = ['$' + f.name.lower() for f in self._features]
         df = self._load_exprs(features)
+        #print("Andy debug: ", df)
         df = df.stack().unstack(level=1)
+        #print("Andy debugs again: ", df)
         dates = df.index.levels[0]                                      # type: ignore
         stock_ids = df.columns
         values = df.values
+        #print("vshape: ", values.shape)
         values = values.reshape((-1, len(features), values.shape[-1]))  # type: ignore
         return torch.tensor(values, dtype=torch.float, device=self.device), dates, stock_ids
 

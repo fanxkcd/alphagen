@@ -70,6 +70,7 @@ class Constant(Expression):
             raise OutOfDataRangeError()
         device = data.data.device
         dtype = data.data.dtype
+        #print("stop:", period.stop, "start: ", period.start, "ndays:", data.n_days)
         days = period.stop - period.start - 1 + data.n_days
         return torch.full(size=(days, data.n_stocks),
                           fill_value=self.value, dtype=dtype, device=device)
